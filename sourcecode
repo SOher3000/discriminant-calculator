@@ -1,0 +1,39 @@
+use std::io::{self, Write};
+
+fn main() {
+    let mut a_str = String::new();
+    let mut b_str = String::new();
+    let mut c_str = String::new();
+
+    println!("Квадратное уравнение");
+
+    print!("Введите число a: ");
+    io::stdout().flush().unwrap();
+    io::stdin().read_line(&mut a_str).expect("Ошибка чтения ввода");
+
+    print!("Введите число b: ");
+    io::stdout().flush().unwrap();
+    io::stdin().read_line(&mut b_str).expect("Ошибка чтения ввода");
+
+    print!("Введите число c: ");
+    io::stdout().flush().unwrap();
+    io::stdin().read_line(&mut c_str).expect("Ошибка чтения ввода");
+
+    let a: f64 = a_str.trim().parse().expect("Ошибка преобразования строки в число");
+    let b: f64 = b_str.trim().parse().expect("Ошибка преобразования строки в число");
+    let c: f64 = c_str.trim().parse().expect("Ошибка преобразования строки в число");
+
+    let d: f64 = (b * b) - 4.0 * (a * c);
+
+    if d > 0.0 {
+        let x1 = ((-b) + d.sqrt()) / (2.0 * a);
+        let x2 = ((-b) - d.sqrt()) / (2.0 * a);
+
+        println!("Ответ:\nЕсть 2 корня\nD = {}\nПервый корень = {}\nВторой корень = {}", d, x1, x2);
+    } else if d == 0.0 {
+        let x = (-b) / (2.0 * a);
+        println!("Ответ:\nЕсть один корень\nD = {}\nПервый корень = {}", d, x);
+    } else {
+        println!("Корней не существует, дискриминант меньше 0");
+    }
+}
